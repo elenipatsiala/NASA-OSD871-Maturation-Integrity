@@ -1,0 +1,17 @@
+"Program","disease_plot","microglia_plot","Fraction_direction_preserved"
+"Dopaminergic_identity","Control","With",0
+"Maturation","Control","With",1
+"Progenitor_cellcycle","Control","With",1
+"Stress","Control","With",1
+"Dopaminergic_identity","PD","With",1
+"Maturation","PD","With",1
+"Progenitor_cellcycle","PD","With",1
+"Stress","PD","With",1
+"Dopaminergic_identity","Control","Without",1
+"Maturation","Control","Without",1
+"Progenitor_cellcycle","Control","Without",1
+"Stress","Control","Without",0.5
+"Dopaminergic_identity","PD","Without",0.9
+"Maturation","PD","Without",1
+"Progenitor_cellcycle","PD","Without",1
+"Stress","PD","Without",1
