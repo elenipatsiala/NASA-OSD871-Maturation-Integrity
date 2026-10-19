@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NASA OSD-871 Maturation–Integrity</title>
+<meta name="description" content="Preregistered Iterate analysis of maturation versus dopaminergic fidelity in NASA OSD-871.">
+<style>
+:root{--bg:#07111d;--card:#0d1d2e;--text:#eef6ff;--muted:#9fb2c7;--line:#20364b;--cyan:#67e8f9;--blue:#7c9cff;--violet:#b38cff;--amber:#ffc36b;--green:#72e6b1;--rose:#ff8094}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#07111d,#081827 45%,#07111d);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}.wrap{width:min(1150px,calc(100% - 34px));margin:auto}.nav{position:sticky;top:0;z-index:20;background:#07111dcc;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.navin{height:66px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800}.links{display:flex;gap:18px;color:var(--muted);font-size:14px}
+.hero{padding:90px 0 62px;background:radial-gradient(800px 420px at 12% 0%,#234f7e55,transparent),radial-gradient(700px 380px at 90% 0%,#6c4d8e44,transparent)}.eyebrow{display:inline-block;padding:7px 11px;border:1px solid #2b5369;border-radius:999px;color:#bff8ff;font-size:12px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase}
+h1{font-size:clamp(52px,8vw,92px);line-height:.96;letter-spacing:-4px;margin:22px 0}.grad{background:linear-gradient(90deg,#fff,#c7f3ff,#9eb5ff,#d9c3ff);-webkit-background-clip:text;color:transparent}.hero p{font-size:19px;max-width:820px;color:#bdcad7}.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.btn{padding:12px 16px;border:1px solid var(--line);border-radius:13px;font-weight:800}.btn.primary{background:linear-gradient(135deg,#65dfe8,#7c8fff);color:#04121a;border:0}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:52px}.metric,.card{background:linear-gradient(180deg,#102338dd,#0c1a29dd);border:1px solid var(--line);border-radius:20px;padding:22px}.metric b{font-size:32px;display:block}.metric span,.card p{color:var(--muted);font-size:13px}
+section{padding:78px 0}.k{color:var(--cyan);font-size:12px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}h2{font-size:clamp(34px,5vw,56px);line-height:1.05;letter-spacing:-2px;margin:10px 0 18px}.lead{max-width:840px;color:var(--muted);font-size:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.card h3{margin-top:0}.pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.pill{border:1px solid var(--line);border-radius:999px;padding:6px 9px;font-size:12px;font-weight:800}
+.figure{margin-top:32px;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:white}.figure img{width:100%;display:block}.cap{background:#0c1b2b;color:var(--muted);padding:14px 16px;font-size:13px}
+.big{padding:34px;border:1px solid #5e3150;border-radius:24px;background:linear-gradient(180deg,#2c162255,#121b29)}.bigline{font-size:clamp(28px,4vw,46px);font-weight:900}.good{color:var(--green)}.bad{color:var(--rose)}
+.table{overflow:auto;margin-top:24px;border:1px solid var(--line);border-radius:16px}table{width:100%;border-collapse:collapse;min-width:650px}th,td{padding:13px 15px;border-bottom:1px solid var(--line);text-align:left}th{color:#d3e2f0}td{color:#aebfd0}
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}.stage{border:1px solid var(--line);border-radius:18px;padding:22px}.stage small{color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+footer{border-top:1px solid var(--line);padding:38px 0 50px;color:#8398ad;font-size:13px}
+@media(max-width:850px){.links{display:none}.metrics,.grid4,.timeline{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
+@media(max-width:560px){.metrics,.grid4,.timeline{grid-template-columns:1fr}}
+
+/* --- interactive layer --- */
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet));z-index:100}
+.explorer{display:grid;grid-template-columns:260px 1fr;gap:18px;margin-top:28px}
+.subgroup-list{display:grid;gap:10px}
+.subgroup-btn{padding:13px 14px;border:1px solid var(--line);border-radius:14px;background:#0b1a2a;color:var(--muted);text-align:left;cursor:pointer;font-weight:800}
+.subgroup-btn.active{border-color:var(--cyan);color:white;background:#10273a}
+.panel{border:1px solid var(--line);border-radius:20px;padding:24px;background:#0b1a2a}
+.delta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.delta{padding:14px;border:1px solid var(--line);border-radius:14px;background:#0d2031}
+.delta b{display:block;font-size:22px}.delta small{color:var(--muted)}
+.accordion{display:grid;gap:10px;margin-top:24px}.acc{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.acc button{width:100%;padding:15px 16px;background:#0b1a2a;color:white;border:0;text-align:left;cursor:pointer;font-weight:800}
+.acc-content{display:none;padding:15px 16px;color:var(--muted);background:#091624}.acc.open .acc-content{display:block}
+.pathway-bars{display:grid;gap:12px;margin-top:25px}.bar-row{display:grid;grid-template-columns:250px 1fr 70px;gap:12px;align-items:center}
+.bar-track{height:12px;background:#13283b;border-radius:999px;overflow:hidden}.bar-fill{height:100%;background:linear-gradient(90deg,var(--violet),var(--cyan));border-radius:999px}
+.bar-row span{color:#c8d6e4;font-size:13px}
+.figure img{cursor:zoom-in}
+.modal{position:fixed;inset:0;background:rgba(1,7,12,.93);display:none;align-items:center;justify-content:center;z-index:80;padding:24px}
+.modal.open{display:flex}.modal img{max-width:95vw;max-height:90vh;border-radius:18px;background:#fff}
+.modal button{position:absolute;right:24px;top:20px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.10);color:#fff;font-size:24px;cursor:pointer}
+@media(max-width:850px){.explorer{grid-template-columns:1fr}.delta-grid{grid-template-columns:1fr 1fr}.bar-row{grid-template-columns:1fr}}
+@media(max-width:560px){.delta-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body><div class="progress" id="progress"></div>
+<nav class="nav"><div class="wrap navin"><div class="brand">OSD-871 Maturation–Integrity</div><div class="links"><a href="#question">Question</a><a href="#map">Map</a><a href="#robustness">Robustness</a><a href="#pathways">Pathways</a><a href="#conclusion">Conclusion</a></div></div></nav>
+
+<section class="hero">
+<div class="wrap">
+<span class="eyebrow">NASA OSD-871 · Preregistered Iterate</span>
+<h1 class="grad">More mature ≠ more faithful.</h1>
+<p>A preregistered analysis testing whether LEO-associated transcriptional maturation in human iPSC-derived dopaminergic organoids is accompanied by preservation of dopaminergic identity — or whether maturation and biological fidelity can diverge.</p>
+<div class="btns">
+<a class="btn primary" href="#map">Explore the flagship result →</a>
+<a class="btn" target="_blank" href="https://github.com/elenipatsiala/NASA-OSD871-Maturation-Integrity">View Iterate repo ↗</a>
+<a class="btn" target="_blank" href="https://github.com/elenipatsiala/NASA-OSD871-Reproduction">View original Build ↗</a>
+</div>
+<div class="metrics">
+<div class="metric"><b>23</b><span>organoid RNA-seq samples</span></div>
+<div class="metric"><b>4</b><span>preregistered biological programs</span></div>
+<div class="metric"><b>42/42</b><span>preregistered genes available</span></div>
+<div class="metric"><b>100%</b><span>overall leave-one-gene-out direction preserved</span></div>
+</div>
+</div>
+</section>
+
+<section id="question"><div class="wrap">
+<div class="k">01 · The harder question</div>
+<h2>Can an organoid look transcriptionally mature without becoming a better dopaminergic model?</h2>
+<p class="lead">The Build reproduced the selected published Ground-versus-LEO marker directions. The Iterate raises the bar by keeping maturation, dopaminergic identity, progenitor state and stress as separate biological dimensions.</p>
+<div class="grid2">
+<div class="card"><h3>Build asked</h3><p>Can the selected published LEO-associated transcriptional pattern be reproduced?</p></div>
+<div class="card"><h3>Iterate asks</h3><p>If the state looks more mature, is dopaminergic fidelity actually preserved — and does the interpretation survive robustness tests?</p></div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<div class="k">02 · Preregistered framework</div>
+<h2>Four biological programs, frozen before score inspection.</h2>
+<div class="grid2">
+<div class="card"><h3>Neuronal Maturation</h3><div class="pills"><span class="pill">MAP2</span><span class="pill">NEFL</span><span class="pill">NEFM</span><span class="pill">SYP</span><span class="pill">SYT1</span><span class="pill">SNAP25</span><span class="pill">VAMP2</span><span class="pill">SYN1</span></div></div>
+<div class="card"><h3>Dopaminergic Identity / Integrity</h3><div class="pills"><span class="pill">FOXA2</span><span class="pill">LMX1A</span><span class="pill">EN1</span><span class="pill">NR4A2</span><span class="pill">PITX3</span><span class="pill">TH</span><span class="pill">DDC</span><span class="pill">SLC6A3</span><span class="pill">SLC18A2</span><span class="pill">KCNJ6</span></div></div>
+<div class="card"><h3>Progenitor / Cell-Cycle</h3><div class="pills"><span class="pill">SOX2</span><span class="pill">PAX6</span><span class="pill">NES</span><span class="pill">VIM</span><span class="pill">MKI67</span><span class="pill">TOP2A</span><span class="pill">CCNB2</span><span class="pill">CENPF</span></div></div>
+<div class="card"><h3>Cellular Stress</h3><div class="pills"><span class="pill">HSPA5</span><span class="pill">HSP90B1</span><span class="pill">DDIT3</span><span class="pill">ATF4</span><span class="pill">DNAJB1</span><span class="pill">PGK1</span><span class="pill">ARCN1</span><span class="pill">GORASP2</span></div></div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<div class="k">03 · Overall result</div>
+<h2>The overall LEO-associated pattern moved in the preregistered direction.</h2>
+<div class="grid4">
+<div class="metric"><b class="good">+0.475</b><span>Maturation</span></div>
+<div class="metric"><b class="good">+0.193</b><span>Dopaminergic Identity</span></div>
+<div class="metric"><b class="good">−0.586</b><span>Progenitor / Cell-Cycle</span></div>
+<div class="metric"><b class="good">−0.606</b><span>Stress</span></div>
+</div>
+</div></section>
+
+
+<section id="interactive-explorer">
+<div class="wrap">
+  <div class="k">04 · Interactive subgroup explorer</div>
+  <h2>Choose a subgroup and inspect what actually moved from Ground to LEO.</h2>
+  <p class="lead">This explorer uses the real subgroup deltas from the Iterate analysis. It is meant to expose heterogeneity, not hide it.</p>
+  <div class="explorer">
+    <div class="subgroup-list">
+      <button class="subgroup-btn active" data-group="control_with">Control · With microglia</button>
+      <button class="subgroup-btn" data-group="control_without">Control · Without microglia</button>
+      <button class="subgroup-btn" data-group="pd_with">PD · With microglia</button>
+      <button class="subgroup-btn" data-group="pd_without">PD · Without microglia</button>
+    </div>
+    <div class="panel" id="subgroupPanel"></div>
+  </div>
+</div>
+</section>
+
+<section id="map"><div class="wrap">
+<div class="k">04 · Flagship result</div>
+<h2>LEO NeuroTune Map: maturation and identity are not the same axis.</h2>
+<p class="lead">Three of four matched subgroups moved toward higher maturation and higher dopaminergic identity. One did not.</p>
+<div class="figure">
+<img alt="LEO NeuroTune Map" src="https://raw.githubusercontent.com/elenipatsiala/NASA-OSD871-Maturation-Integrity/main/06_FIGURES/LEO_NeuroTune_Map_v1.png">
+<div class="cap">X-axis: Maturation · Y-axis: Dopaminergic Identity / Integrity · Arrows: Ground → LEO.</div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<div class="big">
+<div class="k">05 · The counterexample</div>
+<h2>Control + microglia breaks the simple story.</h2>
+<div class="bigline"><span class="good">Maturation ↑</span> &nbsp; while &nbsp; <span class="bad">Dopaminergic Identity ↓</span></div>
+<p class="lead">The identity decrease persisted across all leave-one-gene-out identity analyses. This is exactly the type of counterexample the framework was designed to expose.</p>
+</div>
+</div></section>
+
+<section id="robustness"><div class="wrap">
+<div class="k">06 · Robustness</div>
+<h2>Does the result collapse when one gene is removed?</h2>
+<div class="table"><table><tr><th>Program</th><th>Overall direction preserved</th></tr><tr><td>Maturation</td><td>8 / 8</td></tr><tr><td>Dopaminergic Identity</td><td>10 / 10</td></tr><tr><td>Progenitor / Cell-Cycle</td><td>8 / 8</td></tr><tr><td>Stress</td><td>8 / 8</td></tr></table></div>
+<div class="figure">
+<img alt="Leave one gene out sensitivity" src="https://raw.githubusercontent.com/elenipatsiala/NASA-OSD871-Maturation-Integrity/main/06_FIGURES/LOO_Sensitivity_Analysis.png">
+<div class="cap">Each point shows the LEO − Ground program shift after removing one gene.</div>
+</div>
+<div class="grid2">
+<div class="card"><h3>PD · Without microglia</h3><p>Removing DDC reversed the dopaminergic-identity direction.</p></div>
+<div class="card"><h3>Control · Without microglia</h3><p>Stress reduction was fragile to removing HSPA5, HSP90B1, DDIT3 or ATF4.</p></div>
+</div>
+</div></section>
+
+<section id="pathways"><div class="wrap">
+<div class="k">07 · Pathway evidence</div>
+<h2>A broader transcriptional state shift — not a blanket “improvement.”</h2>
+<p class="lead">Click through the bars visually before opening the static figure below.</p>
+
+<div class="pathway-bars" id="pathwayBars"></div>
+
+<div class="figure">
+<img alt="Hallmark pathway deltas" src="https://raw.githubusercontent.com/elenipatsiala/NASA-OSD871-Maturation-Integrity/main/06_FIGURES/Hallmark_Pathway_Overall_Deltas.png">
+<div class="cap">Selected MSigDB Hallmark pathway scoring. Exploratory pathway evidence; not formal GSEA.</div>
+</div>
+<div class="grid2">
+<div class="card"><h3>Consistent with lower proliferation / stress</h3><p>E2F, G2M, TNFα/NF-κB, inflammatory response and unfolded-protein-response programs decreased overall.</p></div>
+<div class="card"><h3>But not simply “better”</h3><p>Oxidative-phosphorylation also decreased, suggesting metabolic remodeling and caution against labelling every shift as beneficial.</p></div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<div class="k">08 · Cross-study triangulation</div>
+<h2>Why progenitor ↓ is not proof of useful maturation.</h2>
+<div class="grid2">
+<div class="card"><h3>NASA OSD-871</h3><p>Dopaminergic organoids · actual ISS / LEO exposure · bulk RNA-seq · overall maturation-associated pattern with subgroup heterogeneity.</p></div>
+<div class="card"><h3>Park et al. 2026</h3><p>Cerebral organoids · 3D clinostat · targeted gene/protein/neurochemical readouts · progenitor-marker loss did not equal straightforward beneficial maturation.</p></div>
+</div>
+</div></section>
+
+<section id="conclusion"><div class="wrap">
+<div class="k">09 · Qualified conclusion</div>
+<h2>The overall pattern is robust. The biological interpretation is conditional.</h2>
+<div class="grid2">
+<div class="card"><h3>Supported</h3><p>Overall LEO-associated transcription shifted toward higher maturation, higher dopaminergic identity and lower progenitor/cell-cycle and stress scores, with overall directions robust to single-gene removal.</p></div>
+<div class="card"><h3>Not supported</h3><p>Universal improvement, functional maturation, microgravity-specific causality, a better Parkinson’s model or a validated biomarker.</p></div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<div class="k">10 · Research trajectory</div>
+<h2>Build → Iterate → Create</h2>
+<div class="timeline">
+<div class="stage"><small>Build</small><h3>Reproduce</h3><p>Recover the selected published OSD-871 marker-direction pattern.</p></div>
+<div class="stage"><small>Iterate</small><h3>Stress-test</h3><p>Separate maturation from dopaminergic fidelity and expose robustness and counterexamples.</p></div>
+<div class="stage"><small>Create</small><h3>LEO-NeuroTune</h3><p>Build an interpretable framework that exposes maturation, fidelity, dysregulation and uncertainty.</p></div>
+</div>
+</div></section>
+
+<footer><div class="wrap">Preregistered student research project · External expert response pending · Program scores are exploratory summaries, not validated biomarkers.</div></footer>
+<div class="modal" id="modal"><button id="closeModal">×</button><img id="modalImg" alt=""></div>
+
+<script>
+const groups={
+  control_with:{title:"Control · With microglia",m:0.1889805,i:-0.1200458,s:-0.53972541,pattern:"Maturation ↑ / Identity ↓",note:"Key counterexample: maturation rose while dopaminergic identity fell. The identity decrease persisted across all leave-one-gene-out identity variants."},
+  control_without:{title:"Control · Without microglia",m:1.1536301,i:0.3460984,s:-0.02602563,pattern:"Maturation ↑ / Identity ↑",note:"Strong maturation and identity shifts. Stress change was tiny and fragile to several stress-gene removals."},
+  pd_with:{title:"PD · With microglia",m:0.4886253,i:0.4877603,s:-0.70453098,pattern:"Maturation ↑ / Identity ↑",note:"Both maturation and identity increased, with a sizeable decrease in the stress score."},
+  pd_without:{title:"PD · Without microglia",m:0.1008630,i:0.1308434,s:-1.07808948,pattern:"Maturation ↑ / Identity ↑",note:"Identity increased in the primary score, but removing DDC reversed the direction in leave-one-gene-out sensitivity."}
+};
+function renderGroup(key){
+  const g=groups[key], f=v=>(v>=0?"+":"")+v.toFixed(3);
+  document.getElementById("subgroupPanel").innerHTML=
+  `<h3>${g.title}</h3><p class="lead">${g.pattern}</p>
+   <div class="delta-grid">
+    <div class="delta"><b class="${g.m>=0?"good":"bad"}">${f(g.m)}</b><small>Maturation shift</small></div>
+    <div class="delta"><b class="${g.i>=0?"good":"bad"}">${f(g.i)}</b><small>Identity shift</small></div>
+    <div class="delta"><b class="${g.s<=0?"good":"bad"}">${f(g.s)}</b><small>Stress shift</small></div>
+    <div class="delta"><b>${g.i>=0?"Concordant":"Divergent"}</b><small>Maturation vs identity</small></div>
+   </div><p style="margin-top:18px;color:var(--muted)">${g.note}</p>`;
+}
+renderGroup("control_with");
+document.querySelectorAll(".subgroup-btn").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".subgroup-btn").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active"); renderGroup(b.dataset.group);
+}));
+
+const pathways=[
+["TNFA signaling via NF-kB",-0.538],
+["E2F targets",-0.338],
+["G2M checkpoint",-0.333],
+["Unfolded protein response",-0.238],
+["Inflammatory response",-0.197],
+["Oxidative phosphorylation",-0.191],
+["Reactive oxygen species",-0.122],
+["Glycolysis",-0.080]
+];
+const maxAbs=Math.max(...pathways.map(x=>Math.abs(x[1])));
+const bars=document.getElementById("pathwayBars");
+if(bars){
+  bars.innerHTML=pathways.map(([n,v])=>
+    `<div class="bar-row"><span>${n}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.abs(v)/maxAbs*100}%"></div></div><strong>${v.toFixed(3)}</strong></div>`
+  ).join("");
+}
+
+document.querySelectorAll(".acc button").forEach(b=>b.addEventListener("click",()=>b.parentElement.classList.toggle("open")));
+
+const modal=document.getElementById("modal"), modalImg=document.getElementById("modalImg");
+document.querySelectorAll(".figure img").forEach(img=>img.addEventListener("click",()=>{
+  modalImg.src=img.src; modalImg.alt=img.alt; modal.classList.add("open");
+}));
+document.getElementById("closeModal").addEventListener("click",()=>modal.classList.remove("open"));
+modal.addEventListener("click",e=>{if(e.target===modal)modal.classList.remove("open")});
+
+window.addEventListener("scroll",()=>{
+  const d=document.documentElement;
+  document.getElementById("progress").style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+"%";
+});
+</script>
+
+</body>
+</html>
